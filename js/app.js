@@ -24,20 +24,20 @@ const winningCombos = [
   [2, 5, 8],
   [6, 4, 2],
   [0, 4, 8]
-];
+]
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-let board = ['','','','','','','','',''];
+let board = ['','','','','','','','','']
 let turn = 'X';
-let winner = false;
-let tie = false;
+let winner = false
+let tie = false
 
 /*------------------------ Cached Element References ------------------------*/
 
-const squareEls = Array.from(document.getElementsByClassName('sqr'));
-const messageEl = document.getElementById('message');
-const resetBtn = document.getElementById('reset-btn');
+const squareEls = Array.from(document.getElementsByClassName('sqr'))
+const messageEl = document.getElementById('message')
+const resetBtn = document.getElementById('reset-btn')
 
 
 /*----------------------------- Functions -----------------------------*/
@@ -48,9 +48,9 @@ const resetBtn = document.getElementById('reset-btn');
   })
 
   if (winner) {
-    messageEl.textContent = `${winner} wins!`;
+    messageEl.textContent = `${winner} wins!`
   } else if (tie) {
-    messageEl.textContent = "It's a tie!";
+    messageEl.textContent = "It's a tie!"
   } else {
     messageEl.textContent = `Player ${turn}'s turn`;
   }
@@ -60,10 +60,10 @@ const resetBtn = document.getElementById('reset-btn');
 const handleClick = (event) => {
   const index = squareEls.indexOf(event.target);
   if (board[index] === '' && !winner) {
-    board[index] = turn;
-    checkWin();
+    board[index] = turn
+    checkWin()
     turn = turn === 'X' ? 'O' : 'X';
-    render();
+    render()
   }
 }
 
@@ -72,36 +72,36 @@ const checkWin = () => {
   winningCombos.forEach(combo => {
     const [a, b, c] = combo;
     if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-      winner = board[a];
+      winner = board[a]
     }
   });
   if (!board.includes('') && !winner) {
-    tie = true;
+    tie = true
   }
 }
 
 // Game init 
 const init = () => {
-  render();
+  render()
 }
-init();
+init()
 
 //Game Reset
 const resetGame = () => {
   board = ['','','','','','','','',''];
   turn = 'X';
-  winner = false;
-  tie = false;
-  render();
+  winner = false
+  tie = false
+  render()
 }
 
 
 /*----------------------------- Event Listeners -----------------------------*/
 
 squareEls.forEach(squareEl => {
-  squareEl.addEventListener('click', handleClick);
+  squareEl.addEventListener('click', handleClick)
 });
 
-resetBtn.addEventListener('click', resetGame);
+resetBtn.addEventListener('click', resetGame)
 
 
